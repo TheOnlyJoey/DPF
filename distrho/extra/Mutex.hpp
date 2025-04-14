@@ -220,7 +220,7 @@ private:
     DISTRHO_DECLARE_NON_COPYABLE(RecursiveMutex)
 };
 
-#ifndef _MSC_VER
+//#if !defined _MSC_VER
 // -----------------------------------------------------------------------
 // Signal class
 
@@ -301,7 +301,7 @@ private:
     DISTRHO_PREVENT_HEAP_ALLOCATION
     DISTRHO_DECLARE_NON_COPYABLE(Signal)
 };
-#endif // _MSC_VER
+//#endif // _MSC_VER
 
 // -----------------------------------------------------------------------
 // Helper class to lock&unlock a mutex during a function scope.
