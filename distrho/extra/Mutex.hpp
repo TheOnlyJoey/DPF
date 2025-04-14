@@ -38,8 +38,6 @@
         #define PTHREAD_PRIO_INHERIT 8
         #define PTHREAD_PRIO_PROTECT 16
         #define PTHREAD_PRIO_MULT 32
-        #define PTHREAD_PROCESS_SHARED 0
-        #define PTHREAD_PROCESS_PRIVATE 1
         #include <pthread.h>
     #endif()
     
