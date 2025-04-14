@@ -33,6 +33,13 @@
         #define DISTRHO_OS_WINDOWS__TODO
         #pragma NOTE(DPF Mutex implementation is TODO on MSVC)
     #else()
+        //Add missing defines that are not implemented in pthread4w
+        #define PTHREAD_PRIO_NONE 0
+        #define PTHREAD_PRIO_INHERIT 8
+        #define PTHREAD_PRIO_PROTECT 16
+        #define PTHREAD_PRIO_MULT 32
+        #define PTHREAD_PROCESS_SHARED 0
+        #define PTHREAD_PROCESS_PRIVATE 1
         #include <pthread.h>
     #endif()
     
