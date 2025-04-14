@@ -32,14 +32,14 @@
     #ifndef __clang__
         #define DISTRHO_OS_WINDOWS__TODO
         #pragma NOTE(DPF Mutex implementation is TODO on MSVC)
-    #else()
+    #else
         //Add missing defines that are not implemented in pthread4w
         #define PTHREAD_PRIO_NONE 0
         #define PTHREAD_PRIO_INHERIT 8
         #define PTHREAD_PRIO_PROTECT 16
         #define PTHREAD_PRIO_MULT 32
         #include <pthread.h>
-    #endif()
+    #endif
     
 #else
 #include <pthread.h>
@@ -68,7 +68,10 @@ public:
        #else
         pthread_mutexattr_t attr;
         pthread_mutexattr_init(&attr);
-        pthread_mutexattr_setprotocol(&attr, inheritPriority ? PTHREAD_PRIO_INHERIT : PTHREAD_PRIO_NONE);
+        
+        #ifndef WIN32
+            pthread_mutexattr_setprotocol(&attr, inheritPriority ? PTHREAD_PRIO_INHERIT : PTHREAD_PRIO_NONE);
+        #endif
         pthread_mutexattr_settype(&attr, PTHREAD_MUTEX_NORMAL);
         pthread_mutex_init(&fMutex, &attr);
         pthread_mutexattr_destroy(&attr);
