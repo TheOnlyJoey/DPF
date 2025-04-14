@@ -174,7 +174,7 @@ else()
   target_include_directories("${NAME}" PUBLIC
     "${DPF_ROOT_DIR}/distrho")
 endif()
-)
+
   if(_dpf_plugin_USE_FILE_BROWSER)
     target_compile_definitions("${NAME}" PUBLIC "DGL_USE_FILE_BROWSER")
   endif()
