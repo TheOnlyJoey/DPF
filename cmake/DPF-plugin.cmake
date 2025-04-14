@@ -169,7 +169,7 @@ function(dpf_add_plugin NAME)
   dpf__add_static_library("${NAME}" ${_dpf_plugin_FILES_COMMON})
 if (WIN32)
   target_include_directories("${NAME}" PUBLIC
-    "${pthreads4w_SOURCE_DIR}", "${DPF_ROOT_DIR}/distrho")
+    "${pthreads4w_SOURCE_DIR}" "${DPF_ROOT_DIR}/distrho")
 else()
   target_include_directories("${NAME}" PUBLIC
     "${DPF_ROOT_DIR}/distrho")
