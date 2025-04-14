@@ -29,8 +29,13 @@
 
 // FIXME make Mutex stop relying on pthread
 #ifdef _MSC_VER
-#define DISTRHO_OS_WINDOWS__TODO
-#pragma NOTE(DPF Mutex implementation is TODO on MSVC)
+    #ifndef __clang__
+        #define DISTRHO_OS_WINDOWS__TODO
+        #pragma NOTE(DPF Mutex implementation is TODO on MSVC)
+    #else()
+        #include <pthread.h>
+    #endif()
+    
 #else
 #include <pthread.h>
 #endif

@@ -108,6 +108,15 @@ include(CMakeParseArguments)
 #   `USE_WEB_VIEW`
 #       enable web browser view APIs
 #
+if (WIN32)
+  include(FetchContent)
+  FetchContent_Declare(pthreads4w
+    GIT_REPOSITORY https://github.com/GerHobbelt/pthread-win32.git
+    GIT_TAG 3309f4d6e7538f349ae450347b02132ecb0606a7)
+  FetchContent_MakeAvailable(pthreads4w)
+  #add_library(pthreads4w STATIC IMPORTED)
+endif()
+
 function(dpf_add_plugin NAME)
   set(options MONOLITHIC NO_SHARED_RESOURCES USE_FILE_BROWSER USE_WEB_VIEW)
   set(oneValueArgs MODGUI_CLASS_NAME UI_TYPE)
@@ -158,9 +167,14 @@ function(dpf_add_plugin NAME)
 
   ###
   dpf__add_static_library("${NAME}" ${_dpf_plugin_FILES_COMMON})
+if (WIN32)
+  target_include_directories("${NAME}" PUBLIC
+    "${pthreads4w_SOURCE_DIR}", "${DPF_ROOT_DIR}/distrho")
+else()
   target_include_directories("${NAME}" PUBLIC
     "${DPF_ROOT_DIR}/distrho")
-
+endif()
+)
   if(_dpf_plugin_USE_FILE_BROWSER)
     target_compile_definitions("${NAME}" PUBLIC "DGL_USE_FILE_BROWSER")
   endif()
